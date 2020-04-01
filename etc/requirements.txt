@@ -1,2 +1,4 @@
 aiohttp==3.6.2
 uvloop==0.14.0
+ujson==2.0.3
+aiogram==2.6.1

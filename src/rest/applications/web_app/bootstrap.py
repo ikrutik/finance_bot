@@ -2,7 +2,7 @@ import logging.config
 
 from aiohttp import web
 
-from src.rest.applications.web_app.midllewares.factory import middleware_factory
+from src.rest.applications.web_app.middlewares.factory import middleware_factory
 from src.rest.settings import settings
 
 logger = logging.getLogger(__name__)

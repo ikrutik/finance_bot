@@ -10,4 +10,8 @@ application = bootstrap.get_application()
 
 if __name__ == "__main__":
     asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
-    web.run_app(application, host=settings.HOST, port=settings.PORT, ssl_context=settings.SSL_CONTEXT)
+    web.run_app(
+        app=application,
+        host=settings.HOST,
+        port=settings.PORT,
+        ssl_context=settings.SSL_CONTEXT)

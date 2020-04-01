@@ -6,4 +6,4 @@ routes = RouteTableDef()
 
 @routes.get("/")
 async def index(request: Request):
-    return web.Response(text="Hello, world!")
+    return web.Response(text="ok")
