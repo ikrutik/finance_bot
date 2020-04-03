@@ -10,13 +10,19 @@ __DISPATCHER__: Optional[Dispatcher] = None
 def get_dispatcher() -> Dispatcher:
     global __DISPATCHER__
 
-    bot = Bot(token=settings.TELEGRAM_TOKEN)
     if not __DISPATCHER__:
-        __DISPATCHER__ = Dispatcher(bot=bot)
-        __register_routes__()
+        bot = Bot(token=settings.TELEGRAM_TOKEN)
+        dispatcher = Dispatcher(bot=bot)
+        __DISPATCHER__ = dispatcher
+
+        __setup_dispatcher__(dispatcher=dispatcher)
 
     return __DISPATCHER__
 
 
+def __setup_dispatcher__(dispatcher: Dispatcher):
+    __register_routes__()
+
+
 def __register_routes__():
-    from .endpoints import echo  # noqa
+    from .endpoints import commands  # noqa
