@@ -1,3 +1,4 @@
+import asyncio
 from typing import Tuple, Optional
 
 from aiogram import types
@@ -21,14 +22,18 @@ class AddPurchaseResponse(BaseUseCaseResponse):
 
 class AddPurchaseUseCase(BaseUseCase):
     async def __execute__(self, request: AddPurchaseRequest, *args, **kwargs) -> AddPurchaseResponse:
-        message_text = request.message.text.split(" ")[1:]
         amount, description, category = self.get_purchase_data(text=request.message.text)
         purchase = PurchaseDomain(amount=amount, description=description, category=category)
-        await self.sheet_adapter.update_record(purchase.to_cells(row_index=10))
-        return AddPurchaseResponse(value=message_text)
+        await asyncio.create_task(self.sheet_adapter.update_record(purchase.to_cells(row_index=11)))
+        return AddPurchaseResponse(value=amount)
 
     def get_purchase_data(self, text: str) -> Tuple[int, str, str]:
-        amount = category = description = str()
+        """
+
+        :param text:
+        """
+
+        category = description = str()
 
         split_text = list()
         for word in text.split(" "):
@@ -48,9 +53,11 @@ class AddPurchaseUseCase(BaseUseCase):
             raise Exception()
 
         try:
+
             amount = int(amount)
             description = str(description)
             category = str(category)
+
         except ValueError:
             raise Exception()
 

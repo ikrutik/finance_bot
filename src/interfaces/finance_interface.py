@@ -9,9 +9,9 @@ from use_cases.add_purchase import AddPurchaseRequest, AddPurchaseUseCase
 
 async def serialize(message: types.Message, response: BaseUseCaseResponse):
     if bool(response):
-        return await message.reply(response.value)
+        await message.reply(response.value)
     else:
-        return message.reply(next((str(e) for e in response.errors), 'Exception'))
+        await message.reply(next((str(e) for e in response.errors), 'Exception'))
 
 
 class FinanceBotInterface:
@@ -33,7 +33,7 @@ class FinanceBotInterface:
             sheet_adapter=self.sheet_adapter
         )
         response = await use_case.execute(request)
-        return await serialize(message, response)
+        await serialize(message, response)
 
     async def get_today_balance(self, message: types.Message):
         pass
