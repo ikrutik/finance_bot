@@ -62,6 +62,10 @@ class BaseUseCaseResponse(object):
             "errors_occured": errors
         }
 
+    def get_first_error_message(self) -> str:
+        error_message = self.get_display_error_message()
+        return error_message['errors_occured'][0]['message']
+
     @classmethod
     def build_from_exception(cls, exception: Exception):
         """формирует класс ответа из ошибки"""

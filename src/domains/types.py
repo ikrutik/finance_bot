@@ -1,5 +1,6 @@
 from enum import Enum
 
+import aiogram.utils.markdown as md
 from aiogram.utils.helper import Helper, HelperMode, ListItem
 
 
@@ -23,3 +24,18 @@ class TestStates(Helper):
 
 
 TestStates.all()
+
+HELP_DESCRIPTION = md.text(
+    md.text('C помощью бота вы сможете:', ),
+    md.text('Добавить покупку'),
+    md.text('Узнать остаток'),
+    md.text('Посмотреь свои покупки'),
+    md.text(''),
+    md.text('Основные команды:'),
+    md.text('/add \- Добавление покупки'),
+    md.text('/today \- Остаток на сегодня'),
+    md.text('/month \- Остаток на месяц'),
+    md.text('/purchase \- Показать покупки'),
+    md.text('/help \- Помощь'),
+    sep='\n',
+)

@@ -1,17 +1,12 @@
 from aiogram import types
+from aiogram.types import ReplyKeyboardRemove
 
 from adapters.google_cheets import GoogleSheetAdapter
-from base.use_case import BaseUseCaseResponse
+from domains.purchase import PurchaseDomain
+from libs import keyboard
 from libs.helpers import load_credentials
 from rest.settings import settings
-from use_cases.add_purchase import AddPurchaseRequest, AddPurchaseUseCase
-
-
-async def serialize(message: types.Message, response: BaseUseCaseResponse):
-    if bool(response):
-        await message.reply(response.value)
-    else:
-        await message.reply(next((str(e) for e in response.errors), 'Exception'))
+from use_cases.add_purchase import AddPurchaseRequest, AddPurchaseUseCase, AddPurchaseResponse
 
 
 class FinanceBotInterface:
@@ -25,15 +20,33 @@ class FinanceBotInterface:
             )
         )
 
-    async def add_purchase(self, message: types.Message):
-        request = AddPurchaseRequest(
-            message=message
+    async def add_purchase(self, purchase_data: dict, message: types.Message):
+        request: AddPurchaseRequest = AddPurchaseRequest(
+            purchase=PurchaseDomain.from_dict(purchase_data)
         )
-        use_case = AddPurchaseUseCase(
+        use_case: AddPurchaseUseCase = AddPurchaseUseCase(
             sheet_adapter=self.sheet_adapter
         )
-        response = await use_case.execute(request)
-        await serialize(message, response)
+        response: AddPurchaseResponse = await use_case.execute(request)
+
+        if bool(response):
+            await message.reply(
+                text=f'Запись успешно добавлена, осталось на день: {response.balance_today} руб.',
+                reply_markup=ReplyKeyboardRemove()
+            )
+            await message.reply(
+                text='Теперь можете добавить новую покупку',
+                reply_markup=keyboard.keyboard_menu
+            )
+        else:
+            await message.reply(
+                text=f'Произошла ошибка {response.get_first_error_message()}',
+                reply_markup=ReplyKeyboardRemove()
+            )
+            await message.reply(
+                text='Повторите добавление покупки',
+                reply_markup=keyboard.keyboard_menu
+            )
 
     async def get_today_balance(self, message: types.Message):
         pass

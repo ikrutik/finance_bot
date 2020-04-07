@@ -1,18 +1,6 @@
 from aiogram.dispatcher.filters.state import StatesGroup, State
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, KeyboardButton
 
-# button_category_1 = InlineKeyboardButton('Еда', callback_data='category.food')
-# button_category_2 = InlineKeyboardButton('Отдых', callback_data='category.rest')
-# button_category_3 = InlineKeyboardButton('Машина', callback_data='category.car')
-# button_category_4 = InlineKeyboardButton('Обучение', callback_data='category.education')
-#
-# keyboard_categories = InlineKeyboardMarkup(one_time_keyboard=True).row(
-#     button_category_1,
-#     button_category_2,
-#     button_category_3,
-#     button_category_4,
-# )
-
 keyboard_menu = InlineKeyboardMarkup(
     resize_keyboard=True,
     one_time_keyboard=True

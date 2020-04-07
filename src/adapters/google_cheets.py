@@ -9,7 +9,7 @@ from gspread_asyncio import (
 )
 from oauth2client.service_account import ServiceAccountCredentials
 
-from libs.date import get_today_month
+from libs.date import get_now_month_name
 
 
 class GoogleSheetAdapter:
@@ -47,17 +47,17 @@ class GoogleSheetAdapter:
             self.__sheet__ = await client.open_by_url(self.__sheet_url__)
         return self.__sheet__
 
-    @property
-    def now_month(self):
-        if not self.__now_month__:
-            self.__now_month__ = get_today_month()
-
-        return self.__now_month__
-
-    async def get_sheet_by_month(self, month: str) -> AsyncioGspreadWorksheet:
+    async def get_sheet_by_month(self, month_name: Optional[str] = None) -> AsyncioGspreadWorksheet:
         sheet = await self.sheet
-        return await sheet.worksheet(month)
+        month_name = month_name or get_now_month_name()
+        return await sheet.worksheet(month_name)
 
-    async def update_record(self, sheet_cells: List[Cell]) -> dict:
-        worksheet = await self.get_sheet_by_month(self.now_month)
-        return await worksheet.update_cells(cell_list=sheet_cells)
+    async def get_row_values(self, row_index: int, month_name: Optional[str] = None) -> dict:
+        worksheet = await self.get_sheet_by_month(month_name=month_name)
+        row_values = await worksheet.row_values(row_index)
+        return row_values
+
+    async def update_cells(self, sheet_cells: List[Cell], month_name: Optional[str] = None) -> dict:
+        worksheet = await self.get_sheet_by_month(month_name=month_name)
+        result = await worksheet.update_cells(cell_list=sheet_cells)
+        return result

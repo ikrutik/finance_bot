@@ -1,64 +1,83 @@
 import asyncio
-from typing import Tuple, Optional
-
-from aiogram import types
+from datetime import datetime
+from typing import List
 
 from base.use_case import BaseUseCaseResponse, BaseUseCaseRequest, BaseUseCase
 from domains.purchase import PurchaseDomain
+from rest.settings.settings import (
+    COLUMN_INDEX_DESCRIPTION,
+    COLUMN_INDEX_CATEGORY,
+    COLUMN_INDEX_AMOUNT,
+    COLUMN_INDEX_BUDGET_TODAY,
+    ROW_HEADER_OFFSET)
 
 
 class AddPurchaseRequest(BaseUseCaseRequest):
-    def __init__(self, message: types.Message):
+    def __init__(self, purchase: PurchaseDomain):
         super().__init__()
-        self.message = message
+        self.purchase = purchase
 
     def is_valid(self, *args, **kwargs):
         return self
 
 
 class AddPurchaseResponse(BaseUseCaseResponse):
-    pass
+    def __init__(self, balance_today: int):
+        super().__init__(value=dict(response=balance_today))
+        self.balance_today = balance_today
 
 
 class AddPurchaseUseCase(BaseUseCase):
     async def __execute__(self, request: AddPurchaseRequest, *args, **kwargs) -> AddPurchaseResponse:
-        amount, description, category = self.get_purchase_data(text=request.message.text)
-        purchase = PurchaseDomain(amount=amount, description=description, category=category)
-        await asyncio.create_task(self.sheet_adapter.update_record(purchase.to_cells(row_index=11)))
-        return AddPurchaseResponse(value=amount)
+        row_index_for_update = self.get_row_index_for_update()
 
-    def get_purchase_data(self, text: str) -> Tuple[int, str, str]:
-        """
+        row_current_values = await self.sheet_adapter.get_row_values(
+            row_index=row_index_for_update
+        )
+        purchase_to_update = self.get_purchase_with_current_values(
+            purchase=request.purchase, row_values=row_current_values
+        )
+        balance_today = self.get_today_balance(
+            purchase=purchase_to_update, row_values=row_current_values
+        )
+        purchase_cells = request.purchase.to_cells(
+            row_index=row_index_for_update
+        )
+        task_for_execute = self.sheet_adapter.update_cells(
+            sheet_cells=purchase_cells
+        )
 
-        :param text:
-        """
+        await asyncio.create_task(task_for_execute)
 
-        category = description = str()
+        return AddPurchaseResponse(balance_today=balance_today)
 
-        split_text = list()
-        for word in text.split(" "):
-            if '/' in word:
-                continue
-            if word in ["", "'"]:
-                continue
-            split_text.append(word)
+    @classmethod
+    def get_row_index_for_update(cls) -> int:
+        """ """
+        return datetime.today().day + ROW_HEADER_OFFSET
 
-        if len(split_text) == 3:
-            amount, description, category = split_text
-        elif len(split_text) == 2:
-            amount, description = split_text
-        elif len(split_text) == 1:
-            amount = split_text[0]
-        else:
-            raise Exception()
+    def get_purchase_with_current_values(self, purchase: PurchaseDomain, row_values: List[str]) -> PurchaseDomain:
 
         try:
+            current_amount = int("".join(row_values[COLUMN_INDEX_AMOUNT - 1].split(',')))
+            purchase.amount += current_amount
+        except (IndexError, ValueError, AttributeError):
+            pass
+        try:
+            purchase.description = f"{purchase.description}, {row_values[COLUMN_INDEX_DESCRIPTION - 1]}"
+        except IndexError:
+            pass
+        try:
+            purchase.category = f"{purchase.category}, {row_values[COLUMN_INDEX_CATEGORY - 1]}"
+        except IndexError:
+            pass
 
-            amount = int(amount)
-            description = str(description)
-            category = str(category)
+        return purchase
 
-        except ValueError:
+    @classmethod
+    def get_today_balance(cls, purchase: PurchaseDomain, row_values: List[str]) -> int:
+        try:
+            budget_today = int("".join(row_values[COLUMN_INDEX_BUDGET_TODAY - 1].split(',')))
+            return budget_today - purchase.amount
+        except (IndexError, ValueError, AttributeError):
             raise Exception()
-
-        return amount, description, category
