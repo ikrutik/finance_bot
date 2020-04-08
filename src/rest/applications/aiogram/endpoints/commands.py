@@ -2,22 +2,11 @@ from aiogram import types
 from aiogram.types import ParseMode
 
 from domains.types import HELP_DESCRIPTION
-from interfaces.finance_interface import FinanceBotInterface
 from libs import keyboard
 from libs.keyboard import PurchaseStates
 from rest.applications.aiogram.bootstrap import get_dispatcher
 
 dispatcher = get_dispatcher()
-
-
-@dispatcher.message_handler(commands=['help'])
-async def get_help(msg: types.Message):
-    await dispatcher.bot.send_message(
-        chat_id=msg.from_user.id,
-        text=HELP_DESCRIPTION,
-        parse_mode=ParseMode.MARKDOWN_V2,
-        reply_markup=keyboard.keyboard_menu
-    )
 
 
 @dispatcher.message_handler(commands=['add'])
@@ -28,17 +17,52 @@ async def add_command(message: types.Message):
 
 @dispatcher.message_handler(commands=['today'])
 async def get_balance_today(message: types.Message):
-    await FinanceBotInterface().get_today_balance(message)
+    await message.reply("Еще не реализовано", reply_markup=keyboard.keyboard_menu)
 
 
 @dispatcher.message_handler(commands=['month'])
 async def get_balance_month(message: types.Message):
-    await FinanceBotInterface().get_month_balance(message)
+    await message.reply("Еще не реализовано", reply_markup=keyboard.keyboard_menu)
 
 
 @dispatcher.message_handler(commands=['purchase'])
 async def get_purchase(message: types.Message):
-    await FinanceBotInterface().get_month_balance(message)
+    await message.reply("Еще не реализовано", reply_markup=keyboard.keyboard_menu)
+
+
+@dispatcher.message_handler(commands=['help'])
+async def get_help(message: types.Message):
+    await dispatcher.bot.send_message(
+        chat_id=message.from_user.id,
+        text=HELP_DESCRIPTION,
+        parse_mode=ParseMode.MARKDOWN_V2,
+        reply_markup=keyboard.keyboard_menu
+    )
+
+
+@dispatcher.message_handler(commands=['menu'])
+async def get_menu(message: types.Message):
+    await dispatcher.bot.send_message(
+        chat_id=message.from_user.id,
+        text='Добро пожаловать',
+        reply_markup=keyboard.keyboard_menu
+    )
+
+
+@dispatcher.message_handler(commands=['reset'])
+async def reset_state(message: types.Message):
+    current_state = dispatcher.current_state(
+        user=message.from_user.id
+    )
+    if current_state is not None:
+        await current_state.reset_data()
+        await current_state.finish()
+
+    await dispatcher.bot.send_message(
+        chat_id=message.from_user.id,
+        text='Успешный сброс',
+        reply_markup=keyboard.keyboard_menu
+    )
 
 
 @dispatcher.message_handler()

@@ -47,7 +47,7 @@ class AddPurchaseUseCase(BaseUseCase):
             sheet_cells=purchase_cells
         )
 
-        await asyncio.create_task(task_for_execute)
+        asyncio.create_task(task_for_execute)
 
         return AddPurchaseResponse(balance_today=balance_today)
 
@@ -56,7 +56,8 @@ class AddPurchaseUseCase(BaseUseCase):
         """ """
         return datetime.today().day + ROW_HEADER_OFFSET
 
-    def get_purchase_with_current_values(self, purchase: PurchaseDomain, row_values: List[str]) -> PurchaseDomain:
+    @classmethod
+    def get_purchase_with_current_values(cls, purchase: PurchaseDomain, row_values: List[str]) -> PurchaseDomain:
 
         try:
             current_amount = int("".join(row_values[COLUMN_INDEX_AMOUNT - 1].split(',')))
@@ -76,8 +77,10 @@ class AddPurchaseUseCase(BaseUseCase):
 
     @classmethod
     def get_today_balance(cls, purchase: PurchaseDomain, row_values: List[str]) -> int:
+
         try:
             budget_today = int("".join(row_values[COLUMN_INDEX_BUDGET_TODAY - 1].split(',')))
             return budget_today - purchase.amount
+
         except (IndexError, ValueError, AttributeError):
             raise Exception()

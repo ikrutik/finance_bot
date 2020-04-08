@@ -12,8 +12,12 @@
 
 ~~Detect month today~~
 
-- Clear purchase for today button
-- Reset flow for purchase
+~~Pipenv~~
+
+~~Clear purchase for today button~~
+
+~~Reset flow for purchase~~
+
 
 - Create new sheet by month
 - Get Balance Today
@@ -21,6 +25,8 @@
 - Get Today purchases
 - Refactoring
 - Documentation
-- Pipenv
 - Добавить смайлы
 - Exception
+- Webhook
+- MakeFile
+- Docker

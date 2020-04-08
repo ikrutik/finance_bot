@@ -1,0 +1,20 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+aiohttp = "*"
+uvloop = "*"
+ujson = "*"
+aiogram = "*"
+google-api-python-client = "*"
+google-auth-httplib2 = "*"
+gspread_asyncio = "*"
+oauth2client = "*"
+gspread = "*"
+
+[requires]
+python_version = "3.8"
