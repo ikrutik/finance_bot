@@ -11,9 +11,21 @@ from libs import keyboard
 from libs.helpers import load_credentials
 from rest.applications.aiogram.bootstrap import get_dispatcher
 from rest.settings import settings
-from use_cases.add_purchase import AddPurchaseRequest, AddPurchaseUseCase, AddPurchaseResponse
-from use_cases.get_today_balance import GetTodayBalanceResponse, GetTodayBalanceUseCase, GetTodayBalanceRequest
-from use_cases.get_today_purchases import GetTodayPurchasesResponse, GetTodayPurchasesRequest, GetTodayPurchasesUseCase
+from use_cases.add_purchase import (
+    AddPurchaseRequest,
+    AddPurchaseUseCase,
+    AddPurchaseResponse
+)
+from use_cases.get_today_balance import (
+    GetTodayBalanceResponse,
+    GetTodayBalanceUseCase,
+    GetTodayBalanceRequest
+)
+from use_cases.get_today_purchases import (
+    GetTodayPurchasesResponse,
+    GetTodayPurchasesRequest,
+    GetTodayPurchasesUseCase
+)
 
 
 class FinanceBotInterface:
@@ -45,18 +57,7 @@ class FinanceBotInterface:
                 parse_mode=ParseMode.MARKDOWN_V2,
                 reply_markup=keyboard.keyboard_menu
             )
-
-            # await message.reply(
-            #     text=self.__get_response_text(success_value=response.balance_today),
-            #     parse_mode=ParseMode.MARKDOWN_V2,
-            #     reply_markup=keyboard.keyboard_menu
-            # )
         else:
-            # await message.reply(
-            #     text=self.__get_response_text(failed_response=response),
-            #     parse_mode=ParseMode.MARKDOWN_V2,
-            #     reply_markup=keyboard.keyboard_menu,
-            # )
             await self.dispatcher.bot.send_message(
                 chat_id=message.chat.id,
                 text=self.__get_response_text(failed_response=response),
@@ -78,17 +79,7 @@ class FinanceBotInterface:
                 parse_mode=ParseMode.MARKDOWN_V2,
                 reply_markup=keyboard.keyboard_menu
             )
-            # await message.reply(
-            #     text=self.__get_response_text(success_value=response.balance_today),
-            #     parse_mode=ParseMode.MARKDOWN_V2,
-            #     reply_markup=keyboard.keyboard_menu
-            # )
         else:
-            # await message.reply(
-            #     text=self.__get_response_text(failed_response=response),
-            #     parse_mode=ParseMode.MARKDOWN_V2,
-            #     reply_markup=keyboard.keyboard_menu,
-            # )
             await self.dispatcher.bot.send_message(
                 chat_id=message.chat.id,
                 text=self.__get_response_text(failed_response=response),
@@ -104,21 +95,12 @@ class FinanceBotInterface:
         response: GetTodayPurchasesResponse = await use_case.execute(request)
 
         if bool(response):
-            # await message.reply(
-            #     text=response.purchases,
-            #     reply_markup=keyboard.keyboard_menu
-            # )
             await self.dispatcher.bot.send_message(
                 chat_id=message.chat.id,
                 text=response.purchases,
                 reply_markup=keyboard.keyboard_menu
             )
         else:
-            # await message.reply(
-            #     text=self.__get_response_text(failed_response=response),
-            #     parse_mode=ParseMode.MARKDOWN_V2,
-            #     reply_markup=keyboard.keyboard_menu,
-            # )
             await self.dispatcher.bot.send_message(
                 chat_id=message.chat.id,
                 text=self.__get_response_text(failed_response=response),

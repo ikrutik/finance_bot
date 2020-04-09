@@ -30,12 +30,14 @@
 
 ~~Добавить выделение текста при ответах~~
 
-- Может заменить reply на sendMessage
-- Удаление клавиатуры
+~~Может заменить reply на sendMessage~~
+
+~~Удаление клавиатуры~~
 
 - Refactoring
-- Documentation
 - WebHook
+- CI (Tox, Github CI, Gitlab CI)
 - MakeFile
 - Docker
-- CI (Tox, Github CI, Gitlab CI)
+- DevOps
+- Documentation
