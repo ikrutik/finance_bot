@@ -1,15 +1,14 @@
 import asyncio
-from datetime import datetime
 from typing import List
 
-from base.use_case import BaseUseCaseResponse, BaseUseCaseRequest, BaseUseCase
+from base.use_case import BaseUseCaseResponse, BaseUseCaseRequest
 from domains.purchase import PurchaseDomain
 from rest.settings.settings import (
     COLUMN_INDEX_DESCRIPTION,
     COLUMN_INDEX_CATEGORY,
     COLUMN_INDEX_AMOUNT,
-    COLUMN_INDEX_BUDGET_TODAY,
-    ROW_HEADER_OFFSET)
+    COLUMN_INDEX_BUDGET_TODAY)
+from use_cases.base_finance_use_case import BaseFinanceUseCase
 
 
 class AddPurchaseRequest(BaseUseCaseRequest):
@@ -27,7 +26,7 @@ class AddPurchaseResponse(BaseUseCaseResponse):
         self.balance_today = balance_today
 
 
-class AddPurchaseUseCase(BaseUseCase):
+class AddPurchaseUseCase(BaseFinanceUseCase):
     async def __execute__(self, request: AddPurchaseRequest, *args, **kwargs) -> AddPurchaseResponse:
         row_index_for_update = self.get_row_index_for_update()
 
@@ -50,11 +49,6 @@ class AddPurchaseUseCase(BaseUseCase):
         asyncio.create_task(task_for_execute)
 
         return AddPurchaseResponse(balance_today=balance_today)
-
-    @classmethod
-    def get_row_index_for_update(cls) -> int:
-        """ """
-        return datetime.today().day + ROW_HEADER_OFFSET
 
     @classmethod
     def get_purchase_with_current_values(cls, purchase: PurchaseDomain, row_values: List[str]) -> PurchaseDomain:

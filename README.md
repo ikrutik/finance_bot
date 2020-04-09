@@ -18,15 +18,20 @@
 
 ~~Reset flow for purchase~~
 
+~~Get Balance Today~~
 
-- Create new sheet by month
-- Get Balance Today
-- Get Balance Month
-- Get Today purchases
+~~Get Today purchases~~
+
+- Create new sheet by month if new month now
+- Exceptions
+- Добавить смайлы
+- Добавить выделение текста
+- Может заменить reply на sendMessage
+- Удаление клавиатуры
+
 - Refactoring
 - Documentation
-- Добавить смайлы
-- Exception
-- Webhook
+- WebHook
 - MakeFile
 - Docker
+- CI (Tox, Github CI, Gitlab CI)

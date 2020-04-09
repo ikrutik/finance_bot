@@ -46,6 +46,7 @@ async def process_category(message: types.Message, state: FSMContext):
 @reset_text_handler
 async def process_amount(message: types.Message, state: FSMContext):
     await PurchaseStates.next()
+
     await state.update_data(
         amount=int(message.text)
     )
@@ -65,4 +66,5 @@ async def process_description(message: types.Message, state: FSMContext):
         purchase_data=await state.get_data(),
         message=message
     )
+
     await state.finish()

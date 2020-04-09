@@ -1,6 +1,5 @@
 import logging
 
-from adapters.google_cheets import GoogleSheetAdapter
 from .exception import BaseFinanceException
 
 logger = logging.getLogger(__name__)
@@ -85,12 +84,6 @@ class BaseUseCaseResponse(object):
 
 class BaseUseCase:
     """Базовый use case"""
-
-    def __init__(
-            self,
-            sheet_adapter: GoogleSheetAdapter
-    ):
-        self.sheet_adapter = sheet_adapter
 
     async def execute(self, request: BaseUseCaseRequest, *args, **kwargs) -> BaseUseCaseResponse:
         request = request.is_valid()

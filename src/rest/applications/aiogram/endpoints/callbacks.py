@@ -1,5 +1,6 @@
 from aiogram import types
 
+from interfaces.finance_interface import FinanceBotInterface
 from libs import keyboard
 from libs.keyboard import PurchaseStates
 from rest.applications.aiogram.bootstrap import get_dispatcher
@@ -25,10 +26,8 @@ async def process_callback_today_balance(callback_query: types.CallbackQuery):
     await dispatcher.bot.answer_callback_query(
         callback_query_id=callback_query.id
     )
-
-    await callback_query.message.reply(
-        text="Еще не реализовано",
-        reply_markup=keyboard.keyboard_menu
+    await FinanceBotInterface().get_today_balance(
+        message=callback_query.message
     )
 
 
@@ -38,15 +37,13 @@ async def process_callback_today_purchases(callback_query: types.CallbackQuery):
         callback_query_id=callback_query.id
     )
 
-    await callback_query.message.reply(
-        text="Еще не реализовано",
-        reply_markup=keyboard.keyboard_menu
+    await FinanceBotInterface().get_today_purchases(
+        message=callback_query.message
     )
 
 
 @dispatcher.message_handler(lambda c: c.data and c.data == 'reset')
 async def process_callback_reset_state(callback_query: types.CallbackQuery):
-
     await dispatcher.bot.answer_callback_query(
         callback_query_id=callback_query.id
     )
