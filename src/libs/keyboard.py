@@ -1,6 +1,8 @@
 from aiogram.dispatcher.filters.state import StatesGroup, State
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, KeyboardButton
 
+from domains.types import PurchaseCategory
+
 keyboard_menu = InlineKeyboardMarkup(
     resize_keyboard=True,
     one_time_keyboard=True
@@ -11,11 +13,11 @@ keyboard_menu = InlineKeyboardMarkup(
     InlineKeyboardButton('Сброс', callback_data='reset'),
 )
 
-button_category_1 = KeyboardButton('Еда')
-button_category_2 = KeyboardButton('Отдых')
-button_category_3 = KeyboardButton('Машина')
-button_category_4 = KeyboardButton('Обучение')
-button_reset = KeyboardButton('Сброс')
+button_category_1 = KeyboardButton(PurchaseCategory.MEAL.value)
+button_category_2 = KeyboardButton(PurchaseCategory.REST.value)
+button_category_3 = KeyboardButton(PurchaseCategory.CAR.value)
+button_category_4 = KeyboardButton(PurchaseCategory.EDUCATION.value)
+button_reset = KeyboardButton(PurchaseCategory.RESET.value)
 
 keyboard_categories = ReplyKeyboardMarkup(
     resize_keyboard=True,
@@ -46,8 +48,7 @@ keyboard_description = ReplyKeyboardMarkup(
 )
 
 
-# States
 class PurchaseStates(StatesGroup):
-    category = State()  # Will be represented in storage as 'Form:name'
-    amount = State()  # Will be represented in storage as 'Form:gender'
-    description = State()  # Will be represented in storage as 'Form:age'
+    category = State()
+    amount = State()
+    description = State()

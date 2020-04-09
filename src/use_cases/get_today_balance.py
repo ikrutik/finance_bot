@@ -1,9 +1,8 @@
-from datetime import datetime
 from typing import List
 
+from base.exception import BalanceParseError
 from base.use_case import BaseUseCaseResponse, BaseUseCaseRequest
-from rest.settings.settings import (
-    ROW_HEADER_OFFSET, COLUMN_INDEX_BALANCE_TODAY)
+from rest.settings.settings import COLUMN_INDEX_BALANCE_TODAY
 from use_cases.base_finance_use_case import BaseFinanceUseCase
 
 
@@ -40,4 +39,4 @@ class GetTodayBalanceUseCase(BaseFinanceUseCase):
             return balance_today
 
         except (IndexError, ValueError, AttributeError):
-            raise Exception()
+            raise BalanceParseError()

@@ -1,6 +1,7 @@
 import asyncio
 from typing import List
 
+from base.exception import BalanceParseError, PurchaseCreateError
 from base.use_case import BaseUseCaseResponse, BaseUseCaseRequest
 from domains.purchase import PurchaseDomain
 from rest.settings.settings import (
@@ -54,17 +55,17 @@ class AddPurchaseUseCase(BaseFinanceUseCase):
     def get_purchase_with_current_values(cls, purchase: PurchaseDomain, row_values: List[str]) -> PurchaseDomain:
 
         try:
-            current_amount = int("".join(row_values[COLUMN_INDEX_AMOUNT - 1].split(',')))
-            purchase.amount += current_amount
+            purchase.amount += int("".join(row_values[COLUMN_INDEX_AMOUNT - 1].split(',')) or 0)
+        except (IndexError, ValueError, AttributeError):
+            raise PurchaseCreateError()
+
+        try:
+            purchase.description = f"{purchase.description}, {row_values[COLUMN_INDEX_DESCRIPTION - 1]}"
         except (IndexError, ValueError, AttributeError):
             pass
         try:
-            purchase.description = f"{purchase.description}, {row_values[COLUMN_INDEX_DESCRIPTION - 1]}"
-        except IndexError:
-            pass
-        try:
             purchase.category = f"{purchase.category}, {row_values[COLUMN_INDEX_CATEGORY - 1]}"
-        except IndexError:
+        except (IndexError, ValueError, AttributeError):
             pass
 
         return purchase
@@ -77,4 +78,4 @@ class AddPurchaseUseCase(BaseFinanceUseCase):
             return budget_today - purchase.amount
 
         except (IndexError, ValueError, AttributeError):
-            raise Exception()
+            raise BalanceParseError()

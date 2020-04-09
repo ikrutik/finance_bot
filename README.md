@@ -22,10 +22,14 @@
 
 ~~Get Today purchases~~
 
-- Create new sheet by month if new month now
-- Exceptions
-- Добавить смайлы
-- Добавить выделение текста
+~~Create new sheet by month if new month now~~
+
+~~Exceptions new~~
+
+~~Добавить смайлы~~
+
+~~Добавить выделение текста при ответах~~
+
 - Может заменить reply на sendMessage
 - Удаление клавиатуры
 

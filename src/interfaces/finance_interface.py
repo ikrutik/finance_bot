@@ -1,6 +1,11 @@
+from typing import Any, Optional
+
+import aiogram.utils.markdown as md
 from aiogram import types
+from aiogram.types import ParseMode
 
 from adapters.google_cheets import GoogleSheetAdapter
+from base.use_case import BaseUseCaseResponse
 from domains.purchase import PurchaseDomain
 from libs import keyboard
 from libs.helpers import load_credentials
@@ -32,13 +37,15 @@ class FinanceBotInterface:
 
         if bool(response):
             await message.reply(
-                text=f'Запись успешно добавлена, осталось на день: {response.balance_today} руб.',
+                text=self.__get_response_text(success_value=response.balance_today),
+                parse_mode=ParseMode.MARKDOWN_V2,
                 reply_markup=keyboard.keyboard_menu
             )
         else:
             await message.reply(
-                text=f'Произошла ошибка {response.get_first_error_message()}',
-                reply_markup=keyboard.keyboard_menu
+                text=self.__get_response_text(failed_response=response),
+                parse_mode=ParseMode.MARKDOWN_V2,
+                reply_markup=keyboard.keyboard_menu,
             )
 
     async def get_today_balance(self, message: types.Message):
@@ -50,13 +57,15 @@ class FinanceBotInterface:
 
         if bool(response):
             await message.reply(
-                text=f'Осталось на день: {response.balance_today} руб.',
+                text=self.__get_response_text(success_value=response.balance_today),
+                parse_mode=ParseMode.MARKDOWN_V2,
                 reply_markup=keyboard.keyboard_menu
             )
         else:
             await message.reply(
-                text=f'Произошла ошибка {response.get_first_error_message()}',
-                reply_markup=keyboard.keyboard_menu
+                text=self.__get_response_text(failed_response=response),
+                parse_mode=ParseMode.MARKDOWN_V2,
+                reply_markup=keyboard.keyboard_menu,
             )
 
     async def get_today_purchases(self, message: types.Message):
@@ -73,6 +82,28 @@ class FinanceBotInterface:
             )
         else:
             await message.reply(
-                text=f'Произошла ошибка {response.get_first_error_message()}',
-                reply_markup=keyboard.keyboard_menu
+                text=self.__get_response_text(failed_response=response),
+                parse_mode=ParseMode.MARKDOWN_V2,
+                reply_markup=keyboard.keyboard_menu,
             )
+
+    @classmethod
+    def __get_response_text(
+            cls,
+            success_value: Optional[Any] = None,
+            failed_response: Optional[BaseUseCaseResponse] = None) -> str:
+
+        if success_value:
+            return md.text(
+                md.text("💥Осталось на день: "),
+                md.bold(f"{success_value} руб"),
+                sep=" ",
+            )
+        elif failed_response is not None:
+            return md.text(
+                md.text("🔥Произошла ошибка: "),
+                md.bold(f"{failed_response.get_first_error_message()}"),
+                sep=" ",
+            )
+
+        return md.text(str())

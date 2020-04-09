@@ -14,7 +14,7 @@ dispatcher = get_dispatcher()
 async def add_command(message: types.Message):
     await PurchaseStates.category.set()
     await message.reply(
-        text="Выберите категорию",
+        text="🚥🎲Выберите категорию",
         reply_markup=keyboard.keyboard_categories
     )
 
@@ -37,7 +37,7 @@ async def get_purchases_today(message: types.Message):
 async def get_menu(message: types.Message):
     await dispatcher.bot.send_message(
         chat_id=message.from_user.id,
-        text='Добро пожаловать',
+        text='🚪Добро пожаловать',
         reply_markup=keyboard.keyboard_menu
     )
 
@@ -53,7 +53,7 @@ async def reset_state(message: types.Message):
 
     await dispatcher.bot.send_message(
         chat_id=message.from_user.id,
-        text='Успешный сброс',
+        text='⚙️Успешный сброс',
         reply_markup=keyboard.keyboard_menu
     )
 

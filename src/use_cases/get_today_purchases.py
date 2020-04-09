@@ -2,6 +2,7 @@ from typing import List
 
 import aiogram.utils.markdown as md
 
+from base.exception import PurchasesParseError
 from base.use_case import BaseUseCaseResponse, BaseUseCaseRequest
 from rest.settings.settings import (
     COLUMN_INDEX_DESCRIPTION)
@@ -41,4 +42,4 @@ class GetTodayPurchasesUseCase(BaseFinanceUseCase):
             return md.text(*purchases, sep='\n')
 
         except (IndexError, ValueError, AttributeError):
-            raise Exception()
+            raise PurchasesParseError()

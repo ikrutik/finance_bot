@@ -18,7 +18,7 @@ def reset_text_handler(func):
                 await state.finish()
 
             await message.reply(
-                text='Успешный сброс',
+                text='⚙️Успешный сброс',
                 reply_markup=keyboard.keyboard_menu
             )
             return
@@ -37,7 +37,7 @@ async def process_category(message: types.Message, state: FSMContext):
     await PurchaseStates.next()
 
     await message.reply(
-        text='Теперь запишите сумму покупки для категории',
+        text='💶Сумма покупки',
         reply_markup=keyboard.keyboard_amount
     )
 
@@ -51,7 +51,7 @@ async def process_amount(message: types.Message, state: FSMContext):
         amount=int(message.text)
     )
     await message.reply(
-        text=f'Напиши описание, если есть желание:',
+        text=f'🏄🏼‍♂️Напиши описание:',
         reply_markup=keyboard.keyboard_description
     )
 

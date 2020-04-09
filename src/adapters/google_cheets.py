@@ -1,6 +1,6 @@
 from typing import Optional, List
 
-from gspread import Cell
+from gspread import Cell, WorksheetNotFound
 from gspread_asyncio import (
     AsyncioGspreadClient,
     AsyncioGspreadClientManager,
@@ -9,6 +9,7 @@ from gspread_asyncio import (
 )
 from oauth2client.service_account import ServiceAccountCredentials
 
+from base.exception import WorkSheetNotFoundError
 from libs.date import get_now_month_name
 
 
@@ -48,9 +49,15 @@ class GoogleSheetAdapter:
         return self.__sheet__
 
     async def get_sheet_by_month(self, month_name: Optional[str] = None) -> AsyncioGspreadWorksheet:
-        sheet = await self.sheet
-        month_name = month_name or get_now_month_name()
-        return await sheet.worksheet(month_name)
+
+        try:
+            sheet = await self.sheet
+            month = month_name or get_now_month_name()
+            worksheet = await sheet.worksheet(month)
+            return worksheet
+
+        except WorksheetNotFound :
+            raise WorkSheetNotFoundError()
 
     async def get_row_values(self, row_index: int, month_name: Optional[str] = None) -> dict:
         worksheet = await self.get_sheet_by_month(month_name=month_name)
