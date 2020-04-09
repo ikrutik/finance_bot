@@ -17,10 +17,12 @@ def reset_text_handler(func):
             if state is not None:
                 await state.finish()
 
-            await message.reply(
+            await dispatcher.bot.send_message(
+                chat_id=message.chat.id,
                 text='⚙️Успешный сброс',
                 reply_markup=keyboard.keyboard_menu
             )
+
             return
 
         return await func(message, state)
@@ -36,7 +38,8 @@ async def process_category(message: types.Message, state: FSMContext):
 
     await PurchaseStates.next()
 
-    await message.reply(
+    await dispatcher.bot.send_message(
+        chat_id=message.chat.id,
         text='💶Сумма покупки',
         reply_markup=keyboard.keyboard_amount
     )
@@ -50,7 +53,8 @@ async def process_amount(message: types.Message, state: FSMContext):
     await state.update_data(
         amount=int(message.text)
     )
-    await message.reply(
+    await dispatcher.bot.send_message(
+        chat_id=message.chat.id,
         text=f'🏄🏼‍♂️Напиши описание:',
         reply_markup=keyboard.keyboard_description
     )

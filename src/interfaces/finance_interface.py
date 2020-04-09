@@ -9,6 +9,7 @@ from base.use_case import BaseUseCaseResponse
 from domains.purchase import PurchaseDomain
 from libs import keyboard
 from libs.helpers import load_credentials
+from rest.applications.aiogram.bootstrap import get_dispatcher
 from rest.settings import settings
 from use_cases.add_purchase import AddPurchaseRequest, AddPurchaseUseCase, AddPurchaseResponse
 from use_cases.get_today_balance import GetTodayBalanceResponse, GetTodayBalanceUseCase, GetTodayBalanceRequest
@@ -25,6 +26,7 @@ class FinanceBotInterface:
                 credentials=settings.credentials
             )
         )
+        self.dispatcher = get_dispatcher()
 
     async def add_purchase(self, purchase_data: dict, message: types.Message):
         request: AddPurchaseRequest = AddPurchaseRequest(
@@ -36,16 +38,30 @@ class FinanceBotInterface:
         response: AddPurchaseResponse = await use_case.execute(request)
 
         if bool(response):
-            await message.reply(
+
+            await self.dispatcher.bot.send_message(
+                chat_id=message.chat.id,
                 text=self.__get_response_text(success_value=response.balance_today),
                 parse_mode=ParseMode.MARKDOWN_V2,
                 reply_markup=keyboard.keyboard_menu
             )
+
+            # await message.reply(
+            #     text=self.__get_response_text(success_value=response.balance_today),
+            #     parse_mode=ParseMode.MARKDOWN_V2,
+            #     reply_markup=keyboard.keyboard_menu
+            # )
         else:
-            await message.reply(
+            # await message.reply(
+            #     text=self.__get_response_text(failed_response=response),
+            #     parse_mode=ParseMode.MARKDOWN_V2,
+            #     reply_markup=keyboard.keyboard_menu,
+            # )
+            await self.dispatcher.bot.send_message(
+                chat_id=message.chat.id,
                 text=self.__get_response_text(failed_response=response),
                 parse_mode=ParseMode.MARKDOWN_V2,
-                reply_markup=keyboard.keyboard_menu,
+                reply_markup=keyboard.keyboard_menu
             )
 
     async def get_today_balance(self, message: types.Message):
@@ -56,16 +72,28 @@ class FinanceBotInterface:
         response: GetTodayBalanceResponse = await use_case.execute(request)
 
         if bool(response):
-            await message.reply(
+            await self.dispatcher.bot.send_message(
+                chat_id=message.chat.id,
                 text=self.__get_response_text(success_value=response.balance_today),
                 parse_mode=ParseMode.MARKDOWN_V2,
                 reply_markup=keyboard.keyboard_menu
             )
+            # await message.reply(
+            #     text=self.__get_response_text(success_value=response.balance_today),
+            #     parse_mode=ParseMode.MARKDOWN_V2,
+            #     reply_markup=keyboard.keyboard_menu
+            # )
         else:
-            await message.reply(
+            # await message.reply(
+            #     text=self.__get_response_text(failed_response=response),
+            #     parse_mode=ParseMode.MARKDOWN_V2,
+            #     reply_markup=keyboard.keyboard_menu,
+            # )
+            await self.dispatcher.bot.send_message(
+                chat_id=message.chat.id,
                 text=self.__get_response_text(failed_response=response),
                 parse_mode=ParseMode.MARKDOWN_V2,
-                reply_markup=keyboard.keyboard_menu,
+                reply_markup=keyboard.keyboard_menu
             )
 
     async def get_today_purchases(self, message: types.Message):
@@ -76,15 +104,26 @@ class FinanceBotInterface:
         response: GetTodayPurchasesResponse = await use_case.execute(request)
 
         if bool(response):
-            await message.reply(
+            # await message.reply(
+            #     text=response.purchases,
+            #     reply_markup=keyboard.keyboard_menu
+            # )
+            await self.dispatcher.bot.send_message(
+                chat_id=message.chat.id,
                 text=response.purchases,
                 reply_markup=keyboard.keyboard_menu
             )
         else:
-            await message.reply(
+            # await message.reply(
+            #     text=self.__get_response_text(failed_response=response),
+            #     parse_mode=ParseMode.MARKDOWN_V2,
+            #     reply_markup=keyboard.keyboard_menu,
+            # )
+            await self.dispatcher.bot.send_message(
+                chat_id=message.chat.id,
                 text=self.__get_response_text(failed_response=response),
                 parse_mode=ParseMode.MARKDOWN_V2,
-                reply_markup=keyboard.keyboard_menu,
+                reply_markup=keyboard.keyboard_menu
             )
 
     @classmethod

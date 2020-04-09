@@ -13,8 +13,10 @@ dispatcher = get_dispatcher()
 @dispatcher.message_handler(commands=['add'])
 async def add_command(message: types.Message):
     await PurchaseStates.category.set()
-    await message.reply(
-        text="🚥🎲Выберите категорию",
+
+    await dispatcher.bot.send_message(
+        chat_id=message.chat.id,
+        text="🎲Выберите категорию",
         reply_markup=keyboard.keyboard_categories
     )
 

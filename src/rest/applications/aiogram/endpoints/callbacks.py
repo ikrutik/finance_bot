@@ -15,8 +15,9 @@ async def process_callback_add(callback_query: types.CallbackQuery):
     )
     await PurchaseStates.category.set()
 
-    await callback_query.message.reply(
-        text="Выберите категорию",
+    await dispatcher.bot.send_message(
+        chat_id=callback_query.message.chat.id,
+        text="🎲Выберите категорию",
         reply_markup=keyboard.keyboard_categories
     )
 
