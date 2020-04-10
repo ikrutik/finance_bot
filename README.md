@@ -37,8 +37,9 @@
 ~~WebHook~~
 
 - Refactoring
-- DevOps
-- CI (Tox, Github CI, Gitlab CI)
+- Deploy to server and startup
+- Testing
+- Badges
 - MakeFile
 - Docker
 - Documentation
