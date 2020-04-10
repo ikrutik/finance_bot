@@ -25,6 +25,7 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install pipenv
+        pipenv lock
         pipenv install  --dev --deploy
 
 #    - name: Linter
