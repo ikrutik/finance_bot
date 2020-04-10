@@ -1,4 +1,7 @@
-# finance_bot
+# Finance bot
+
+[![Actions Status](https://github.com/{user}/{repo}/workflows/Test/badge.svg)](https://github.com/ikrutik/finance_bot/actions)
+
 
 ~~Routing Menu with button~~
 
