@@ -39,10 +39,13 @@
 
 ~~WebHook~~
 
-- Refactoring
+~~Badges~~
+
 - Deploy to server and startup
-- Testing
-- Badges
+
 - MakeFile
 - Docker
+
+- Testing
+- Refactoring
 - Documentation

@@ -24,7 +24,6 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install --upgrade pip
         pip install pipenv
         pipenv lock
         pipenv install --dev --deploy
