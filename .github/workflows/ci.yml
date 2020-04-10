@@ -10,7 +10,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  testing:
 
     runs-on: ubuntu-latest
     env:
@@ -35,3 +35,13 @@ jobs:
     - name: Testing
       run: |
        pipenv run nose2 --verbose --with-coverage --coverage src
+
+  deploy:
+    - name: Deploy to production
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        port: ${{ secrets.SSH_PORT }}
+        username: ${{ secrets.SSH_USERNAME }}
+        passphrase: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: whoami

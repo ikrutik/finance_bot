@@ -8,7 +8,8 @@ from rest.settings.settings import (
     COLUMN_INDEX_DESCRIPTION,
     COLUMN_INDEX_CATEGORY,
     COLUMN_INDEX_AMOUNT,
-    COLUMN_INDEX_BUDGET_TODAY)
+    COLUMN_INDEX_BUDGET_TODAY
+)
 from use_cases.base_finance_use_case import BaseFinanceUseCase
 
 

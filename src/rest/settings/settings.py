@@ -39,7 +39,7 @@ ROW_HEADER_OFFSET: int = 1
 
 sheet_url: str = str()
 scopes: List[str] = list()
-credentials: Dict[str] = dict()
+credentials: Dict[str, str] = dict()
 
 try:
     from .local_settings import *  # noqa

@@ -4,8 +4,7 @@ import aiogram.utils.markdown as md
 
 from base.exception import PurchasesParseError
 from base.use_case import BaseUseCaseResponse, BaseUseCaseRequest
-from rest.settings.settings import (
-    COLUMN_INDEX_DESCRIPTION)
+from rest.settings.settings import COLUMN_INDEX_DESCRIPTION
 from use_cases.base_finance_use_case import BaseFinanceUseCase
 
 

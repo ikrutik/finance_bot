@@ -41,11 +41,16 @@
 
 ~~Badges~~
 
-- Deploy to server and startup
+~~Integration Domain Name~~
+~~Integration Https~~
+----------------------------------
 
-- MakeFile
-- Docker
-
-- Testing
+- Run in local enviroments
+- Makefile create for CI (Local)
+- Systemd integration
+- Integration Deploy via github actions
+ ----------------------------------
+- Docker integration and test
 - Refactoring
+- Create tests
 - Documentation
