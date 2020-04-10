@@ -34,25 +34,16 @@ jobs:
       run: |
        pipenv run nose2 --verbose --with-coverage --coverage src
 
-    - name: Upload files
-      uses: easingthemes/ssh-deploy@v2.0.9
-      env:
-        SOURCE: "."
-        REMOTE_HOST: ${{ secrets.SSH_HOST }}
-        REMOTE_USER: ${{ secrets.SSH_USERNAME }}
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        TARGET: ${{ secrets.REMOTE_TARGET }}
-
-#  deploy:
-#    name: Build
-#    needs: test
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: executing remote ssh commands using password
-#        uses: appleboy/ssh-action@master
-#        with:
-#          host: ${{ secrets.SSH_HOST }}
-#          port: ${{ secrets.SSH_PORT }}
-#          username: ${{ secrets.SSH_USERNAME }}
-#          key: ${{ secrets.SSH_PRIVATE_KEY }}
-#          script: whoami
+  deploy:
+    name: Build
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: ls /home/ubuntu/apps/finance_bot/
