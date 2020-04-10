@@ -12,7 +12,7 @@ on:
 jobs:
   build:
 
-    runs-on: python:3.8
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -23,13 +23,14 @@ jobs:
 
     - name: Install dependencies
       run: |
+        pip install --upgrade pip
         pip install pipenv
         pipenv install  --dev --deploy
 
-    - name: Linter
-      run: |
-        pipenv run flake8 --exclude=".venv/,.git,__pycache__"
-
-    - name: Testing
-      run: |
-        pipenv run nose2 --verbose --with-coverage --coverage core
+#    - name: Linter
+#      run: |
+#        pipenv run flake8 --exclude=".venv/,.git,__pycache__"
+#
+#    - name: Testing
+#      run: |
+#        pipenv run nose2 --verbose --with-coverage --coverage core
