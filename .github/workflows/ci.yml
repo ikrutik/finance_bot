@@ -34,5 +34,4 @@ jobs:
 
     - name: Testing
       run: |
-        pipenv run nose2 --verbose --with-coverage --coverage core
-        pipenv run coverage html
+        env PYTHONPATH=$PWD pipenv run nose2 --verbose --with-coverage --coverage core
