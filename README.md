@@ -34,10 +34,11 @@
 
 ~~Удаление клавиатуры~~
 
+~~WebHook~~
+
 - Refactoring
-- WebHook
+- DevOps
 - CI (Tox, Github CI, Gitlab CI)
 - MakeFile
 - Docker
-- DevOps
 - Documentation
