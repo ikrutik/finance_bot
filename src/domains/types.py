@@ -20,10 +20,10 @@ HELP_DESCRIPTION = md.text(
     md.text('✅Посмотреь свои покупки'),
     md.text(''),
     md.bold('Основные команды:'),
-    md.text('/add \- Добавление покупки'),
-    md.text('/today \- Остаток на сегодня'),
-    md.text('/month \- Остаток на месяц'),
-    md.text('/purchase \- Показать покупки'),
+    md.text('/add \- Добавление покупки'),  # NOQA
+    md.text('/today \- Остаток на сегодня'),  # NOQA
+    md.text('/month \- Остаток на месяц'),  # NOQA
+    md.text('/purchase \- Показать покупки'),  # NOQA
     md.text('/help \- Помощь'),
     sep='\n',
 )

@@ -56,7 +56,7 @@ class GoogleSheetAdapter:
             worksheet = await sheet.worksheet(month)
             return worksheet
 
-        except WorksheetNotFound :
+        except WorksheetNotFound:
             raise WorkSheetNotFoundError()
 
     async def get_row_values(self, row_index: int, month_name: Optional[str] = None) -> dict:

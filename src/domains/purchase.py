@@ -17,7 +17,6 @@ class PurchaseDomain:
     category: str = str()
 
     def to_cells(self, row_index: int) -> List[Cell]:
-
         cell_amount = Cell(row=row_index, col=COLUMN_INDEX_AMOUNT, value=self.amount)
         cell_description = Cell(row=row_index, col=COLUMN_INDEX_DESCRIPTION, value=self.description)
         cell_category = Cell(row=row_index, col=COLUMN_INDEX_CATEGORY, value=self.category)

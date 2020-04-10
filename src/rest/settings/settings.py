@@ -42,6 +42,6 @@ scopes: List[str] = list()
 credentials: Dict[str] = dict()
 
 try:
-    from .local_settings import *
+    from .local_settings import *  # noqa
 except ImportError:
     pass
