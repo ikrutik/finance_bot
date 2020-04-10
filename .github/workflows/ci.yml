@@ -28,10 +28,10 @@ jobs:
         pipenv lock
         pipenv install  --dev --deploy
 
-#    - name: Linter
-#      run: |
-#        pipenv run flake8 --exclude=".venv/,.git,__pycache__"
-#
-#    - name: Testing
-#      run: |
-#        pipenv run nose2 --verbose --with-coverage --coverage core
+    - name: Linter
+      run: |
+        pipenv run flake8 --exclude=".venv/,.git,__pycache__"
+
+    - name: Testing
+      run: |
+        pipenv run nose2 --verbose --with-coverage --coverage core
