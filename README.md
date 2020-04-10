@@ -1,6 +1,6 @@
 # Finance bot
 
-![Status](https://github.com/ikrutik/finance_bot/workflows/Build%20and%20test/badge.svg?branch=master)
+![Status](https://github.com/ikrutik/finance_bot/workflows/Test%20and%20deploy/badge.svg?branch=master)
 
 
 ~~Routing Menu with button~~
