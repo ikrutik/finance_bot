@@ -13,7 +13,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    env:
+      PIPENV_VENV_IN_PROJECT: 1
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.8
@@ -26,7 +27,7 @@ jobs:
         pip install --upgrade pip
         pip install pipenv
         pipenv lock
-        pipenv install  --dev --deploy
+        pipenv install --dev --deploy
 
 #    - name: Linter
 #      run: |
@@ -34,4 +35,5 @@ jobs:
 
     - name: Testing
       run: |
-        env PYTHONPATH=$PWD pipenv run nose2 --verbose --with-coverage --coverage src
+       pipenv run nose2 --verbose --with-coverage --coverage src
+       pipenv run coverage html
