@@ -45,12 +45,20 @@
 ~~Integration Https~~
 ----------------------------------
 
+
 - Run in local enviroments
 - Makefile create for CI (Local)
-- Systemd integration
-- Integration Deploy via github actions
+- Systemd integration ????
+
  ----------------------------------
-- Docker integration and test
+
+- Deploy as monoapp -> ssh -> make deploy -> there is local setting
+- SSH deploy files via rsync -> Make Deploy
+
+- Integration Deploy via github actions
+
+ ----------------------------------
 - Refactoring
 - Create tests
+- Docker integration and test for local
 - Documentation
