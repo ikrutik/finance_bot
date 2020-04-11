@@ -3,7 +3,7 @@ Description=Finance bot daemon
 After=network.target
 
 [Service]
-Environment=GUNICORN_TIMEOUT=30 PIPENV_PIPFILE=                                                                      !!!
+Environment=                                                                                                         !!!
 PIDFile=/run/finance-bot/pid
 User=ubuntu
 Group=ubuntu

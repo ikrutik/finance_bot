@@ -7,14 +7,6 @@ default:
 # Развернуть свежую версию
 deploy: pull clean install_production restart_app_webhook
 
-# Установка Production
-install: ENVIRONMENT=production
-install: install_production
-
-# Установка Testing
-install_test: ENVIRONMENT=testing
-install_test: install_testing
-
 install_production:
 	@echo "Install requirements"
 	pipenv install --deploy
