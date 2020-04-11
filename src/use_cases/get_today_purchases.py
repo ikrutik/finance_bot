@@ -7,7 +7,7 @@ import aiogram.utils.markdown as md
 
 from base.exception import PurchasesParseError
 from base.use_case import BaseUseCaseResponse, BaseUseCaseRequest
-from rest.settings.settings import COLUMN_INDEX_DESCRIPTION
+from rest.settings.settings import COLUMN_INDEX_DESCRIPTION, COLUMN_INDEX_AMOUNT
 from use_cases.base_finance import BaseFinanceUseCase
 
 
@@ -45,8 +45,13 @@ class GetTodayPurchasesUseCase(BaseFinanceUseCase):
         """
 
         try:
+            amount = int("".join(row_values[COLUMN_INDEX_AMOUNT - 1].split(',')))
             purchases = [s.strip() for s in row_values[COLUMN_INDEX_DESCRIPTION - 1].split(',')]
-            return md.text(*purchases, sep='\n')
+            return md.text(
+                md.bold(f"Сумма покупок: {amount}"),
+                md.text(*purchases, sep='\n'),
+                sep='\n'
+            )
 
         except (IndexError, ValueError, AttributeError):
             raise PurchasesParseError()

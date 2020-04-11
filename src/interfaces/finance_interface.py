@@ -112,6 +112,7 @@ class FinanceBotInterface:
             await self.dispatcher.bot.send_message(
                 chat_id=message.chat.id,
                 text=response.purchases,
+                parse_mode=ParseMode.MARKDOWN_V2,
                 reply_markup=keyboard.keyboard_menu
             )
         else:

@@ -30,10 +30,11 @@ HELP_DESCRIPTION = md.text(
     md.text('✅Посмотреь свои покупки'),
     md.text(''),
     md.bold('Основные команды:'),
-    md.text('/add \- Добавление покупки'),  # NOQA
-    md.text('/today \- Остаток на сегодня'),  # NOQA
-    md.text('/month \- Остаток на месяц'),  # NOQA
-    md.text('/purchase \- Показать покупки'),  # NOQA
-    md.text('/help \- Помощь'),
+    md.text('/add \- Добавление покупки'),  # noqa
+    md.text('/balance \- Остаток на сегодня'),  # noqa
+    md.text('/purchases \- Показать покупки'),  # noqa
+    md.text('/menu \- Показать меню'),  # noqa
+    md.text('/reset \- Сброс'),  # noqa
+    md.text('/help \- Помощь'),  # noqa
     sep='\n',
 )
