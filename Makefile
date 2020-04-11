@@ -43,9 +43,9 @@ stop_app_webhook:
 start_service: restart_service
 restart_service:
 	@echo "Restarting service:"
-	sudo /bin/systemctl restart finance-bot
-	sudo /bin/systemctl --no-pager status finance-bot
+	sudo /bin/systemctl restart finance.service
+	sudo /bin/systemctl --no-pager status finance.service
 
 stop_service:
 	@echo "Stopping service:"
-	sudo /bin/systemctl stop finance-bot
+	sudo /bin/systemctl stop finance.service
