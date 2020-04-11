@@ -26,25 +26,25 @@ jobs:
         pip install pipenv
         pipenv lock
         pipenv install --dev --deploy
-
-    - name: Linter
-      run: |
-        pipenv run flake8
-
-    - name: Testing
-      run: |
-       pipenv run nose2 --verbose --with-coverage --coverage src
-
-  deploy:
-    name: Deploy
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Make deploy
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          port: ${{ secrets.SSH_PORT }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: cd ${{secrets.PROJECT_DIRECTORY}} && make deploy
+#
+#    - name: Linter
+#      run: |
+#        pipenv run flake8
+#
+#    - name: Testing
+#      run: |
+#       pipenv run nose2 --verbose --with-coverage --coverage src
+#
+#  deploy:
+#    name: Deploy
+#    needs: test
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Make deploy
+#        uses: appleboy/ssh-action@master
+#        with:
+#          host: ${{ secrets.SSH_HOST }}
+#          port: ${{ secrets.SSH_PORT }}
+#          username: ${{ secrets.SSH_USERNAME }}
+#          key: ${{ secrets.SSH_PRIVATE_KEY }}
+#          script: cd ${{secrets.PROJECT_DIRECTORY}} && make deploy
