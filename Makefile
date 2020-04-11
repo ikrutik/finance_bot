@@ -33,7 +33,7 @@ clean:
 start_app_webhook: restart_app_webhook
 restart_app_webhook:
 	@echo "Restarting app as webhook:"
-	pipenv run python src/rest/applications/aiogram/application.py --mode=webhook
+	#pipenv run python src/rest/applications/aiogram/application.py --mode=webhook
 
 stop_app_webhook:
 	@echo "Stopping app:"
