@@ -1,3 +1,6 @@
+"""
+Use Case for insert purchase for sheet
+"""
 import asyncio
 from typing import List
 
@@ -10,7 +13,7 @@ from rest.settings.settings import (
     COLUMN_INDEX_AMOUNT,
     COLUMN_INDEX_BUDGET_TODAY
 )
-from use_cases.base_finance_use_case import BaseFinanceUseCase
+from use_cases.base_finance import BaseFinanceUseCase
 
 
 class AddPurchaseRequest(BaseUseCaseRequest):
@@ -54,7 +57,12 @@ class AddPurchaseUseCase(BaseFinanceUseCase):
 
     @classmethod
     def get_purchase_with_current_values(cls, purchase: PurchaseDomain, row_values: List[str]) -> PurchaseDomain:
-
+        """
+        Get modified purchase with cuurent values
+        :param purchase: purchaseDomain
+        :param row_values: list of values from row
+        :raise: PurchaseCreateError
+        """
         try:
             purchase.amount += int("".join(row_values[COLUMN_INDEX_AMOUNT - 1].split(',')) or 0)
         except (IndexError, ValueError, AttributeError):
@@ -73,7 +81,12 @@ class AddPurchaseUseCase(BaseFinanceUseCase):
 
     @classmethod
     def get_today_balance(cls, purchase: PurchaseDomain, row_values: List[str]) -> int:
-
+        """
+        Get today balance from purchase and row_values
+        :param purchase: purchaseDomain
+        :param row_values: list of values from row
+        :raise BalanceParseError
+        """
         try:
             budget_today = int("".join(row_values[COLUMN_INDEX_BUDGET_TODAY - 1].split(',')))
             return budget_today - purchase.amount

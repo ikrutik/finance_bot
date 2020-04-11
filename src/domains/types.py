@@ -1,6 +1,15 @@
 from enum import Enum
 
 import aiogram.utils.markdown as md
+from aiogram.dispatcher.filters.state import StatesGroup, State
+
+
+class PurchaseStates(StatesGroup):
+    """ States purchase flow """
+
+    category = State()
+    amount = State()
+    description = State()
 
 
 class PurchaseCategory(Enum):

@@ -2,6 +2,10 @@ from datetime import datetime
 
 
 def get_now_month_name() -> str:
+    """
+    Get month name by number of year
+    """
+
     map_months = {
         1: 'Январь',
         2: 'Февраль',

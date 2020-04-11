@@ -1,3 +1,6 @@
+"""
+Use Case for get purchases
+"""
 from typing import List
 
 import aiogram.utils.markdown as md
@@ -5,7 +8,7 @@ import aiogram.utils.markdown as md
 from base.exception import PurchasesParseError
 from base.use_case import BaseUseCaseResponse, BaseUseCaseRequest
 from rest.settings.settings import COLUMN_INDEX_DESCRIPTION
-from use_cases.base_finance_use_case import BaseFinanceUseCase
+from use_cases.base_finance import BaseFinanceUseCase
 
 
 class GetTodayPurchasesRequest(BaseUseCaseRequest):
@@ -35,6 +38,11 @@ class GetTodayPurchasesUseCase(BaseFinanceUseCase):
 
     @classmethod
     def get_today_purchases(cls, row_values: List[str]) -> str:
+        """
+        Get today purchases
+        :param row_values: list of values from row
+        :raise PurchasesParseError
+        """
 
         try:
             purchases = [s.strip() for s in row_values[COLUMN_INDEX_DESCRIPTION - 1].split(',')]

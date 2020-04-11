@@ -17,5 +17,5 @@ class BaseFinanceUseCase(BaseUseCase):
 
     @classmethod
     def get_row_index_for_update(cls) -> int:
-        """ """
+        """ Get row index for update by today value """
         return datetime.today().day + ROW_HEADER_OFFSET

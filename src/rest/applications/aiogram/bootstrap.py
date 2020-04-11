@@ -20,7 +20,7 @@ def get_dispatcher() -> Dispatcher:
 
     if not __DISPATCHER__:
         dispatcher = Dispatcher(
-            bot=Bot(settings.TELEGRAM_TOKEN),
+            bot=Bot(settings.TELEGRAM_BOT_TOKEN),
             storage=MemoryStorage()
         )
         __DISPATCHER__ = dispatcher

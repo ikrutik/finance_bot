@@ -1,9 +1,12 @@
+"""
+Use Case for get balance
+"""
 from typing import List
 
 from base.exception import BalanceParseError
 from base.use_case import BaseUseCaseResponse, BaseUseCaseRequest
 from rest.settings.settings import COLUMN_INDEX_BALANCE_TODAY
-from use_cases.base_finance_use_case import BaseFinanceUseCase
+from use_cases.base_finance import BaseFinanceUseCase
 
 
 class GetTodayBalanceRequest(BaseUseCaseRequest):
@@ -33,6 +36,11 @@ class GetTodayBalanceUseCase(BaseFinanceUseCase):
 
     @classmethod
     def get_today_balance(cls, row_values: List[str]) -> int:
+        """
+        Get today balance
+        :param row_values: list of values from row
+        :raise BalanceParseError
+        """
 
         try:
             balance_today = int("".join(row_values[COLUMN_INDEX_BALANCE_TODAY - 1].split(',')))

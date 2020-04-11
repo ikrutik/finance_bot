@@ -17,6 +17,8 @@ from rest.settings.settings import StartupMode  # noqa
 
 
 def run_webhook_mode(_dispatcher: Dispatcher, host: str, port: int):
+    """ Run as webhook"""
+
     _dispatcher.run_mode = StartupMode.WEBHOOK.value
 
     start_webhook(
@@ -31,6 +33,7 @@ def run_webhook_mode(_dispatcher: Dispatcher, host: str, port: int):
 
 
 def run_pooling_mode(_dispatcher: Dispatcher):
+    """ Run as pooling"""
     _dispatcher.run_mode = StartupMode.POOLING.value
 
     executor.start_polling(

@@ -1,8 +1,11 @@
+"""
+Callback handlers
+"""
 from aiogram import types
 
+from domains.types import PurchaseStates
 from interfaces.finance_interface import FinanceBotInterface
 from libs import keyboard
-from libs.keyboard import PurchaseStates
 from rest.applications.aiogram.bootstrap import get_dispatcher
 
 dispatcher = get_dispatcher()

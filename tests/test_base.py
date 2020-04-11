@@ -2,6 +2,8 @@ from unittest import TestCase
 
 
 class BaseTestUseCase(TestCase):
+    """Base UseTestCase """
+
     def setUp(self) -> None:
         super().setUp()
 
