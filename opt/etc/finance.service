@@ -4,10 +4,9 @@ After=network.target
 
 [Service]
 Environment=                                                                                                         !!!
-PIDFile=/run/finance-bot/pid
 User=ubuntu
 Group=ubuntu
-RuntimeDirectory=finance-bot
+RuntimeDirectory=finance_bot
 WorkingDirectory=                                                                                                    !!!
 ExecStart=/usr/local/bin/pipenv run python src/rest/applications/aiogram/application.py --mode=webhook
 ExecReload=/bin/kill -s HUP $MAINPID

@@ -46,4 +46,4 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: make deploy
+          script: cd ${{secrets.PROJECT_DIRECTORY}} && make deploy
