@@ -15,7 +15,6 @@ install: install_production
 install_test: ENVIRONMENT=testing
 install_test: install_testing
 
-
 install_production:
 	@echo "Install requirements"
 	pipenv install --deploy
@@ -38,11 +37,23 @@ clean:
 	find . -name __pycache__ -exec rm -fr {} +
 	find . -name '*.pyc' -delete
 
-restart_bot:
-	@echo "Restarting finance-bot:"
+# Run as app webook via pipenv
+start_app_webhook: restart_app_webhook
+restart_app_webhook:
+	@echo "Restarting app as webhook:"
+	pipenv run python src/rest/applications/aiogram/application.py --mode=webhook
+
+stop_app_webhook:
+	@echo "Stopping app:"
+	sudo kill $(sudo lsof -t -i:${RUN_PORT})
+
+# Run as app via systemd
+start_service: restart_service
+restart_service:
+	@echo "Restarting service:"
 	sudo /bin/systemctl restart finance-bot
 	sudo /bin/systemctl --no-pager status finance-bot
 
-stop_bot:
-	@echo "Stopping web app:"
+stop_service:
+	@echo "Stopping service:"
 	sudo /bin/systemctl stop finance-bot

@@ -3,27 +3,17 @@ Description=Finance bot daemon
 After=network.target
 
 [Service]
-Environment=GUNICORN_TIMEOUT=30                                                                                      !!!
+Environment=GUNICORN_TIMEOUT=30 PIPENV_PIPFILE=                                                                      !!!
 PIDFile=/run/finance-bot/pid
-User=deploy
-Group=deploy
+User=ubuntu
+Group=ubuntu
 RuntimeDirectory=finance-bot
 WorkingDirectory=                                                                                                    !!!
-ExecStart=/usr/local/bin/pipenv run gunicorn server:application \
-        --bind 127.0.0.1:8081 \
-        --workers 2 \
-        --worker-class aiohttp.GunicornUVLoopWebWorker \
-        --worker-connections=100 \
-        --backlog=1000 \
-        --timeout ${GUNICORN_TIMEOUT} \
-        --access-logfile=${APP_DIR}logs/access.log \
-        --error-logfile=${APP_DIR}logs/error.log \
-        --log-level=error \
-        --pid /run/finance-service/pid
-
+ExecStart=/usr/local/bin/pipenv run python src/rest/applications/aiogram/application.py --mode=webhook
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
 PrivateTmp=true
+
 
 [Install]
 WantedBy=multi-user.target

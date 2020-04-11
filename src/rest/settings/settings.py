@@ -2,12 +2,6 @@ import os
 from enum import Enum
 from typing import Optional, List, Dict
 
-
-class StartupMode(Enum):
-    WEBHOOK = 'webhook'
-    POOLING = 'pooling'
-
-
 PROJECT_ROOT: str = os.path.abspath(os.path.join(__file__, "../../../../"))
 SRC_ROOT: str = os.path.abspath(os.path.join(PROJECT_ROOT, "src"))
 
@@ -40,6 +34,12 @@ ROW_HEADER_OFFSET: int = 1
 sheet_url: str = str()
 scopes: List[str] = list()
 credentials: Dict[str, str] = dict()
+
+
+class StartupMode(Enum):
+    WEBHOOK = 'webhook'
+    POOLING = 'pooling'
+
 
 try:
     from .local_settings import *  # noqa

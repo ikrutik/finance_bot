@@ -8,14 +8,13 @@ flake8 = "*"
 nose2 = "*"
 
 [packages]
-aiohttp = "*"
+gunicorn = "*"
 uvloop = "*"
-ujson = "*"
 aiogram = "*"
-google-api-python-client = "*"
-google-auth-httplib2 = "*"
-gspread_asyncio = "*"
 oauth2client = "*"
+google-auth-httplib2 = "*"
+google-api-python-client = "*"
+gspread_asyncio = "*"
 gspread = "*"
 
 [requires]

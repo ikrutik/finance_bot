@@ -42,21 +42,20 @@
 ~~Badges~~
 
 ~~Integration Domain Name~~
+
 ~~Integration Https~~
+
+~~Integration Deploy via github actions~~
+
+~~Run in local enviroments~~
+
+~~Makefile create for CI (Local)~~
+
 ----------------------------------
 
-
-- Run in local enviroments
-- Makefile create for CI (Local)
 - Systemd integration ????
 
- ----------------------------------
-
-- Deploy as monoapp -> ssh -> make deploy -> there is local setting
-- SSH deploy files via rsync -> Make Deploy
-
-- Integration Deploy via github actions
-
+- RUN ALL
  ----------------------------------
 - Refactoring
 - Create tests
