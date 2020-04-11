@@ -3,11 +3,11 @@ Description=Finance bot daemon
 After=network.target
 
 [Service]
-Environment=                                                                                                         !!!
+Environment=APP_DIR=/home/ubuntu/apps/finance_bot/
 User=ubuntu
 Group=ubuntu
 RuntimeDirectory=finance_bot
-WorkingDirectory=                                                                                                    !!!
+WorkingDirectory=/home/ubuntu/apps/finance_bot/
 ExecStart=/usr/local/bin/pipenv run python src/rest/applications/aiogram/application.py --mode=webhook
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID

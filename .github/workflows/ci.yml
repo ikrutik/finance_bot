@@ -1,6 +1,6 @@
 # https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: Build, Test and deploy
+name: Build, Test and Deploy
 
 on:
   push:
@@ -10,6 +10,7 @@ on:
 
 jobs:
   test:
+    name: Test and Linter
     runs-on: ubuntu-latest
     env:
       PIPENV_VENV_IN_PROJECT: 1
