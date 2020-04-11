@@ -5,7 +5,7 @@ default:
 	@cat README.md
 
 # Развернуть свежую версию
-deploy: pull clean install_production restart_app_webhook
+deploy: pull clean install_production restart_service
 
 install_production:
 	@echo "Install requirements"
@@ -33,7 +33,7 @@ clean:
 start_app_webhook: restart_app_webhook
 restart_app_webhook:
 	@echo "Restarting app as webhook:"
-	#pipenv run python src/rest/applications/aiogram/application.py --mode=webhook
+	pipenv run python src/rest/applications/aiogram/application.py --mode=webhook
 
 stop_app_webhook:
 	@echo "Stopping app:"

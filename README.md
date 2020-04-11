@@ -51,14 +51,13 @@
 
 ~~Makefile create for CI (Local)~~
 
-----------------------------------
+~~Systemd integration~~
 
-- Systemd integration
+~~RUN ALL~~
 
-- RUN ALL
  ----------------------------------
- 
+ - Docker integration and test for local
+
 - Refactoring
 - Create tests
-- Docker integration and test for local
 - Documentation
