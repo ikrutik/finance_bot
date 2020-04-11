@@ -46,7 +46,7 @@ class GetTodayPurchasesUseCase(BaseFinanceUseCase):
 
         try:
             amount = int("".join(row_values[COLUMN_INDEX_AMOUNT - 1].split(',')))
-            purchases = [f"-{s.strip()}" for s in row_values[COLUMN_INDEX_DESCRIPTION - 1].split(',')]
+            purchases = [s for s in row_values[COLUMN_INDEX_DESCRIPTION - 1].split(',') if s.strip()]
             return md.text(
                 md.bold(f"Сумма покупок: {amount}"),
                 md.text(*purchases, sep='\n'),
