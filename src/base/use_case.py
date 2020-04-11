@@ -6,7 +6,7 @@ logger = logging.getLogger(__name__)
 
 
 class BaseUseCaseRequest(object):
-    """Базовый класс запроса в use case"""
+    """Base class of Request for UseCase"""
 
     def __init__(self):
         self.errors = []
@@ -31,7 +31,7 @@ class BaseUseCaseRequest(object):
 
 
 class BaseUseCaseResponse(object):
-    """Базовый класс ответа use case"""
+    """Base class of Response for UseCase"""
 
     def __init__(self, value=None, *args, **kwargs):
         self.errors = []
@@ -49,7 +49,10 @@ class BaseUseCaseResponse(object):
     __bool__ = __nonzero__
 
     def get_display_error_message(self, *args, **kwargs) -> dict:
-        """Метод для получения текста ошибки для пользователя"""
+        """
+        Get user's message of exceptions
+        """
+
         errors = []
         for error in self.errors:
             errors.append({
@@ -62,12 +65,13 @@ class BaseUseCaseResponse(object):
         }
 
     def get_first_error_message(self) -> str:
+        """ Get first error message """
         error_message = self.get_display_error_message()
         return error_message['errors_occured'][0]['message']
 
     @classmethod
     def build_from_exception(cls, exception: Exception):
-        """формирует класс ответа из ошибки"""
+        """Build instance of class for response from error """
         if not issubclass(type(exception), BaseFinanceException):
             exception = BaseFinanceException()
         instance = cls()
@@ -76,14 +80,14 @@ class BaseUseCaseResponse(object):
 
     @classmethod
     def build_from_invalid_request(cls, invalid_request: 'BaseUseCaseRequest') -> 'BaseUseCaseResponse':
-        """формирует класс ответа из не валидно запроса"""
+        """Build instance of class for response from invalid request """
         instance = cls()
         instance.errors.extend(invalid_request.errors)
         return instance
 
 
 class BaseUseCase:
-    """Базовый use case"""
+    """Base UseCase """
 
     async def execute(self, request: BaseUseCaseRequest, *args, **kwargs) -> BaseUseCaseResponse:
         request = request.is_valid()
@@ -98,5 +102,5 @@ class BaseUseCase:
         return response
 
     async def __execute__(self, request: BaseUseCaseRequest, *args, **kwargs) -> BaseUseCaseResponse:
-        """Метод в котором должна содержаться вся бизнес логика"""
+        """Method for main business logic """
         raise NotImplementedError()

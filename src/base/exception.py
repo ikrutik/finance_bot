@@ -3,12 +3,12 @@ from typing import Optional
 
 class BaseFinanceException(Exception):
     """
-
+    Base exception for project
     """
 
     error_code: int = 50000
     http_code: int = 500
-    message: str = "Базовая ошибка"
+    message: str = "Base exception"
 
     def __init__(
             self,

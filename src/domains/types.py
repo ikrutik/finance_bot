@@ -4,7 +4,7 @@ import aiogram.utils.markdown as md
 
 
 class PurchaseCategory(Enum):
-    """ """
+    """ Categories for purchase """
 
     MEAL = 'Еда'
     REST = 'Отдых'
@@ -13,6 +13,7 @@ class PurchaseCategory(Enum):
     RESET = 'Сброс'
 
 
+# Description for /help command
 HELP_DESCRIPTION = md.text(
     md.bold('🔥C помощью бота вы сможете:', ),
     md.text('✅Добавить покупку'),
