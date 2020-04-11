@@ -55,8 +55,7 @@
 
 ~~RUN ALL~~
 
- ----------------------------------
- - Docker integration and test for local
+~~Docker integration and test for local~~
 
 - Refactoring
 - Create tests

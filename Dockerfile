@@ -1,14 +1,19 @@
 FROM python:3.8
+USER root
 
-ENV PYTHONPATH /usr/src/app
-WORKDIR $PYTHONPATH
+ADD Pipfile.lock /code/Pipfile.lock
+ADD Pipfile /code/Pipfile
 
-COPY . .
-RUN mkdir logs
+ARG APP_VERSION=0
+ENV PYTHONUNBUFFERED 1
+WORKDIR /code/
 
 RUN pip install pipenv --no-cache-dir \
-    && env PIP_NO_CACHE_DIR=1 pipenv install --deploy
+    && env PIP_NO_CACHE_DIR=1 \
+    && env PIPENV_VENV_IN_PROJECT=1 pipenv install --deploy
 
-ENV PYTHONUNBUFFERED 1
+COPY . /code/.
+
+EXPOSE 8081
 
 CMD ["pipenv", "run", "python", "src/rest/applications/aiogram/application.py", "--mode=webhook"]
