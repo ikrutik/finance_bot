@@ -5,7 +5,7 @@ default:
 	@cat README.md
 
 # Развернуть свежую версию
-deploy: pull clean install_production restart_app
+deploy: pull clean install_production restart_app_webhook
 
 # Установка Production
 install: ENVIRONMENT=production

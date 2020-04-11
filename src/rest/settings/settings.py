@@ -1,3 +1,4 @@
+import logging
 import os
 from enum import Enum
 from typing import Optional, List, Dict
@@ -10,6 +11,7 @@ HOST: str = "127.0.0.1"
 PORT: int = 8081
 DEBUG: bool = False
 
+BASE_LOG_LEVEL = logging.DEBUG
 SSL_CONTEXT: Optional[tuple] = None
 SKIP_UPDATES: bool = True
 RELAX_TIMEOUT: float = 1.0

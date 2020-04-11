@@ -35,15 +35,15 @@ jobs:
        pipenv run nose2 --verbose --with-coverage --coverage src
 
   deploy:
-    name: Build
+    name: Deploy
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - name: executing remote ssh commands using password
+      - name: Make deploy
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           port: ${{ secrets.SSH_PORT }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: ls /home/ubuntu/apps/finance_bot/
+          script: make deploy

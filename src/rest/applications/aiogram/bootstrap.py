@@ -8,9 +8,9 @@ from aiogram.contrib.middlewares.logging import LoggingMiddleware
 from rest.settings import settings
 from rest.settings.settings import StartupMode
 
-logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
+logger.setLevel(level=settings.BASE_LOG_LEVEL)
+logging.basicConfig(level=settings.BASE_LOG_LEVEL)
 
 __DISPATCHER__: Optional[Dispatcher] = None
 
@@ -54,9 +54,9 @@ def __register_middlewares(_dispatcher: Dispatcher):
 
 
 def __register_routes__(_dispatcher: Dispatcher):
-    from .endpoints import commands  # NOQA
-    from .endpoints import callbacks  # NOQA
-    from .endpoints import states  # NOQA
+    from .endpoints import commands  # noqa
+    from .endpoints import callbacks  # noqa
+    from .endpoints import states  # noqa
 
 
 def is_running_as_webhook(_dispatcher: Dispatcher) -> bool:
