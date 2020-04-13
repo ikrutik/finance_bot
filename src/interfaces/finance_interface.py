@@ -32,6 +32,8 @@ class FinanceBotInterface:
     """Interface for UseCases"""
 
     def __init__(self):
+        self.dispatcher = get_dispatcher()
+
         self.sheet_adapter = GoogleSheetAdapter(
             url=settings.SHEET_URL,
             credentials=load_credentials(
@@ -39,7 +41,6 @@ class FinanceBotInterface:
                 credentials=settings.GOOGLE_CREDENTIALS
             )
         )
-        self.dispatcher = get_dispatcher()
 
     async def add_purchase(self, purchase_data: dict, message: types.Message):
         """
