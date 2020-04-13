@@ -27,9 +27,7 @@ def reset_text_handler(func):
             )
 
             return
-
         return await func(message, state)
-
     return decorator
 
 
@@ -54,7 +52,7 @@ async def process_amount(message: types.Message, state: FSMContext):
     await PurchaseStates.next()
 
     await state.update_data(
-        amount=int(message.text)
+        amount=message.text
     )
     await dispatcher.bot.send_message(
         chat_id=message.chat.id,

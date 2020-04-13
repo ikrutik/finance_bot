@@ -3,10 +3,10 @@ Use Case for get balance
 """
 from typing import List
 
-from base.exception import BalanceParseError
-from base.use_case import BaseUseCaseResponse, BaseUseCaseRequest
-from rest.settings.settings import COLUMN_INDEX_BALANCE_TODAY
-from use_cases.base_finance import BaseFinanceUseCase
+from src.base.exception import BalanceParseError
+from src.base.use_case import BaseUseCaseResponse, BaseUseCaseRequest
+from src.rest.settings.settings import COLUMN_INDEX_BALANCE_TODAY
+from src.use_cases.base_finance import BaseFinanceUseCase
 
 
 class GetTodayBalanceRequest(BaseUseCaseRequest):

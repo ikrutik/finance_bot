@@ -1,10 +1,6 @@
 import logging
-import os
 from enum import Enum
 from typing import Optional, List, Dict
-
-PROJECT_ROOT: str = os.path.abspath(os.path.join(__file__, "../../../../"))
-SRC_ROOT: str = os.path.abspath(os.path.join(PROJECT_ROOT, "src"))
 
 # Logging
 BASE_LOG_LEVEL = logging.DEBUG

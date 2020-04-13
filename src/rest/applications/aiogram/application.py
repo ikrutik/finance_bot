@@ -1,15 +1,14 @@
 import argparse
 import asyncio
-import os
-import sys
+from os.path import abspath, dirname, join as path_join
+from sys import path as sys_path
 
 import uvloop
 from aiogram import Dispatcher
 from aiogram.utils import executor
 from aiogram.utils.executor import start_webhook
 
-src_path = os.path.join(os.path.dirname(__file__), "..", "..", "..")
-sys.path.insert(0, os.path.abspath(src_path))
+sys_path.insert(0, abspath(path_join(dirname(__file__), "..", "..", "..")))
 
 from rest.applications.aiogram import bootstrap  # noqa
 from rest.settings import settings  # noqa

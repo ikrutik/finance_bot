@@ -5,10 +5,10 @@ from typing import List
 
 import aiogram.utils.markdown as md
 
-from base.exception import PurchasesParseError
-from base.use_case import BaseUseCaseResponse, BaseUseCaseRequest
-from rest.settings.settings import COLUMN_INDEX_DESCRIPTION, COLUMN_INDEX_AMOUNT
-from use_cases.base_finance import BaseFinanceUseCase
+from src.base.exception import PurchasesParseError
+from src.base.use_case import BaseUseCaseResponse, BaseUseCaseRequest
+from src.rest.settings.settings import COLUMN_INDEX_DESCRIPTION, COLUMN_INDEX_AMOUNT
+from src.use_cases.base_finance import BaseFinanceUseCase
 
 
 class GetTodayPurchasesRequest(BaseUseCaseRequest):

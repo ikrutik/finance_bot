@@ -36,7 +36,7 @@ class PurchaseDomain:
         :param data: data
         """
         return cls(
-            amount=data.get('amount', str()) or str(),
+            amount=int(data.get('amount', str()) or 0),
             category=data.get('category', str()) or str(),
             description=data.get('description', str()) or str()
         )

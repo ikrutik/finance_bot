@@ -9,8 +9,8 @@ from gspread_asyncio import (
 )
 from oauth2client.service_account import ServiceAccountCredentials
 
-from base.exception import WorkSheetNotFoundError
-from libs.date import get_now_month_name
+from src.base.exception import WorkSheetNotFoundError
+from src.libs.date import get_now_month_name
 
 
 class GoogleSheetAdapter:
@@ -26,7 +26,7 @@ class GoogleSheetAdapter:
     def __init__(
             self,
             url: str,
-            credentials: ServiceAccountCredentials
+            credentials: Optional[ServiceAccountCredentials]
     ):
         """
         :param url: URL sheet
