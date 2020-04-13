@@ -7,6 +7,8 @@ default:
 # Развернуть свежую версию
 deploy: pull clean install_production restart_service
 
+install_and_run: pull clean install_production start_app_pooling
+
 install_production:
 	@echo "Install requirements"
 	pipenv install --deploy
@@ -29,15 +31,12 @@ clean:
 	find . -name __pycache__ -exec rm -fr {} +
 	find . -name '*.pyc' -delete
 
-# Run as app webook via pipenv
-start_app_pooling: restart_app_pooling
-restart_app_pooling:
+# Run as app pooling via pipenv
+start_app_pooling:
 	@echo "Restarting app as pooling:"
 	pipenv run python src/rest/applications/aiogram/application.py
 
-
-start_app_webhook: restart_app_webhook
-restart_app_webhook:
+start_app_webhook:
 	@echo "Restarting app as webhook:"
 	pipenv run python src/rest/applications/aiogram/application.py --mode=webhook
 

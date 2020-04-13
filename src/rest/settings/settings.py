@@ -15,8 +15,8 @@ RELAX_TIMEOUT: float = 1.0
 
 # Webhook setting
 WEBHOOK_HOST: str = str()
-WEBHOOK_PATH: str = str()
-WEBHOOK_URL: str = str()
+WEBHOOK_PATH: str = '/webhook_handler/'
+WEBHOOK_URL: str = f"{WEBHOOK_HOST}{WEBHOOK_PATH}"
 
 # Bot token
 TELEGRAM_BOT_TOKEN: str = str()
@@ -26,8 +26,13 @@ SHEET_URL: str = str()
 
 GOOGLE_CLIENT_ID: str = str()
 GOOGLE_CLIENT_SECRET: str = str()
-AVAILABLE_GOOGLE_SCOPES: List[str] = list()
 GOOGLE_CREDENTIALS: Dict[str, str] = dict()
+
+AVAILABLE_GOOGLE_SCOPES: List[str] = [
+    'https://spreadsheets.google.com/feeds',
+    'https://www.googleapis.com/auth/drive',
+    'https://www.googleapis.com/auth/spreadsheets'
+]
 
 # Indexes of sheet
 ROW_HEADER_OFFSET: int = 1

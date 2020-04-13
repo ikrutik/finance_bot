@@ -16,4 +16,4 @@ COPY . /code/.
 
 EXPOSE 8081
 
-CMD ["pipenv", "run", "python", "src/rest/applications/aiogram/application.py", "--mode=webhook"]
+CMD ["pipenv", "run", "python", "src/rest/applications/aiogram/application.py"]
