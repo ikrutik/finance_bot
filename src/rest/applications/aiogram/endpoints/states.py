@@ -4,10 +4,10 @@ States handlers
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 
-from domains.types import PurchaseStates
-from interfaces.finance_interface import FinanceBotInterface
-from libs import keyboard
-from rest.applications.aiogram.bootstrap import get_dispatcher
+from src.domains.types import PurchaseStates
+from src.interfaces.finance_interface import FinanceBotInterface
+from src.libs import keyboard
+from src.rest.applications.aiogram.bootstrap import get_dispatcher
 
 dispatcher = get_dispatcher()
 
@@ -28,6 +28,7 @@ def reset_text_handler(func):
 
             return
         return await func(message, state)
+
     return decorator
 
 

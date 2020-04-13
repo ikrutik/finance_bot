@@ -8,11 +8,11 @@ from aiogram import Dispatcher
 from aiogram.utils import executor
 from aiogram.utils.executor import start_webhook
 
-sys_path.insert(0, abspath(path_join(dirname(__file__), "..", "..", "..")))
+sys_path.insert(0, abspath(path_join(dirname(__file__), "..", "..", "..", "..")))
 
-from rest.applications.aiogram import bootstrap  # noqa
-from rest.settings import settings  # noqa
-from rest.settings.settings import StartupMode  # noqa
+from src.rest.applications.aiogram import bootstrap  # noqa
+from src.rest.settings import settings  # noqa
+from src.rest.settings.settings import StartupMode  # noqa
 
 
 def run_webhook_mode(_dispatcher: Dispatcher, host: str, port: int):

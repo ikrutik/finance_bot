@@ -3,7 +3,7 @@ from typing import List
 
 from gspread import Cell
 
-from rest.settings.settings import (
+from src.rest.settings.settings import (
     COLUMN_INDEX_DESCRIPTION,
     COLUMN_INDEX_CATEGORY,
     COLUMN_INDEX_AMOUNT

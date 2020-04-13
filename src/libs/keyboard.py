@@ -5,7 +5,7 @@ from aiogram.types import (
     KeyboardButton
 )
 
-from domains.types import PurchaseCategory
+from src.domains.types import PurchaseCategory
 
 # RESET BUTTON
 button_reset = KeyboardButton(PurchaseCategory.RESET.value)

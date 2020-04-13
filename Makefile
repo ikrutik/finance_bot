@@ -30,6 +30,12 @@ clean:
 	find . -name '*.pyc' -delete
 
 # Run as app webook via pipenv
+start_app_pooling: restart_app_pooling
+restart_app_pooling:
+	@echo "Restarting app as pooling:"
+	pipenv run python src/rest/applications/aiogram/application.py
+
+
 start_app_webhook: restart_app_webhook
 restart_app_webhook:
 	@echo "Restarting app as webhook:"

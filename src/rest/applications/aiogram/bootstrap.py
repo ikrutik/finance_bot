@@ -5,8 +5,8 @@ from aiogram import Dispatcher, Bot
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
 
-from rest.settings import settings
-from rest.settings.settings import StartupMode
+from src.rest.settings import settings
+from src.rest.settings.settings import StartupMode
 
 logger = logging.getLogger(__name__)
 logger.setLevel(level=settings.BASE_LOG_LEVEL)

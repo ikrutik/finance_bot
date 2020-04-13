@@ -4,24 +4,24 @@ import aiogram.utils.markdown as md
 from aiogram import types
 from aiogram.types import ParseMode
 
-from adapters.google_cheets import GoogleSheetAdapter
-from base.use_case import BaseUseCaseResponse
-from domains.purchase import PurchaseDomain
-from libs import keyboard
-from libs.helpers import load_credentials
-from rest.applications.aiogram.bootstrap import get_dispatcher
-from rest.settings import settings
-from use_cases.add_purchase import (
+from src.adapters.google_cheets import GoogleSheetAdapter
+from src.base.use_case import BaseUseCaseResponse
+from src.domains.purchase import PurchaseDomain
+from src.libs import keyboard
+from src.libs.helpers import load_credentials
+from src.rest.applications.aiogram.bootstrap import get_dispatcher
+from src.rest.settings import settings
+from src.use_cases.add_purchase import (
     AddPurchaseRequest,
     AddPurchaseUseCase,
     AddPurchaseResponse
 )
-from use_cases.get_today_balance import (
+from src.use_cases.get_today_balance import (
     GetTodayBalanceResponse,
     GetTodayBalanceUseCase,
     GetTodayBalanceRequest
 )
-from use_cases.get_today_purchases import (
+from src.use_cases.get_today_purchases import (
     GetTodayPurchasesResponse,
     GetTodayPurchasesRequest,
     GetTodayPurchasesUseCase
