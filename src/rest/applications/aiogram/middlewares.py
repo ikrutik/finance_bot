@@ -1,8 +1,8 @@
 from aiogram import types
 from aiogram.dispatcher.middlewares import BaseMiddleware
 
-from base.exception import NotAuthorizedUserException
-from rest.settings import settings
+from src.base.exception import NotAuthorizedUserException
+from src.rest.settings import settings
 
 
 class AuthMiddleware(BaseMiddleware):
