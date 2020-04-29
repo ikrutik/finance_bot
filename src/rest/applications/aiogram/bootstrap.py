@@ -5,6 +5,7 @@ from aiogram import Dispatcher, Bot
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
 
+from rest.applications.aiogram.middlewares import AuthMiddleware
 from src.rest.settings import settings
 from src.rest.settings.settings import StartupMode
 
@@ -50,6 +51,7 @@ def __setup_dispatcher__(_dispatcher: Dispatcher):
 
 
 def __register_middlewares(_dispatcher: Dispatcher):
+    _dispatcher.middleware.setup(AuthMiddleware())
     _dispatcher.middleware.setup(LoggingMiddleware(logger=logger))
 
 

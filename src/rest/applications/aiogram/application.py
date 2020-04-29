@@ -70,6 +70,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
     dispatcher = bootstrap.get_dispatcher()
+
     if args.mode == StartupMode.WEBHOOK.value:
         run_webhook_mode(_dispatcher=dispatcher, host=args.host, port=args.port)
     else:

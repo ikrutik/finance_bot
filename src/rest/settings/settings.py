@@ -1,6 +1,6 @@
 import logging
 from enum import Enum
-from typing import Optional, List, Dict
+from typing import Optional, List, Dict, Union
 
 # Logging
 BASE_LOG_LEVEL = logging.DEBUG
@@ -18,8 +18,9 @@ WEBHOOK_HOST: str = str()
 WEBHOOK_PATH: str = '/webhook_handler/'
 WEBHOOK_URL: str = f"{WEBHOOK_HOST}{WEBHOOK_PATH}"
 
-# Bot token
+# Telegram
 TELEGRAM_BOT_TOKEN: str = str()
+TELEGRAM_USER_ID: Union[str, int] = str()
 
 # Google credentials
 SHEET_URL: str = str()

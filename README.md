@@ -43,6 +43,6 @@ pipenv run python src/rest/applications/aiogram/application.py --mode=webhook
 1. [Obtain OAuth2 credentials from Google Developers Console](http://gspread.readthedocs.org/en/latest/oauth2.html) - `GOOGLE_CREDENTIALS`
 2. Get [Google API](https://console.developers.google.com/) credentials -  `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`
 3. Copy [spreadsheet](https://docs.google.com/spreadsheets/d/1C_CyWpjUeZGXSHvQgF-YKcxtZvkywsscnJq51stiWEA/copy) to your google drive and set URL -  `SHEET_URL`
-5. Create your telegram bot via [@Bot_father](https://core.telegram.org/bots) and set token -  `TELEGRAM_BOT_TOKEN`
+5. Create your telegram bot via [@Bot_father](https://core.telegram.org/bots) and set token and user_id -  `TELEGRAM_BOT_TOKEN`, `TELEGRAM_USER_ID`
 6. [Optional] Set webhook host -  `WEBHOOK_HOST`
 7. Profit 🎐

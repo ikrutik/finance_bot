@@ -46,3 +46,9 @@ class WorkSheetNotFoundError(BaseFinanceException):
     error_code: int = 40410
     http_code: int = 404
     message: str = "Не найдена таблица при поиске"
+
+
+class NotAuthorizedUserException(BaseFinanceException):
+    error_code: int = 40300
+    http_code: int = 403
+    message: str = "Ошибка авториазации"
